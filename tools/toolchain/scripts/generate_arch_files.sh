@@ -35,16 +35,16 @@ LD_arch="IF_MPI(${MPIFC}|${FC})"
 # we always want good line information and backtraces
 if [ "${with_intel}" != "__DONTUSE__" ]; then
   if [ "${TARGET_CPU}" = "native" ]; then
-    BASEFLAGS="-fPIC -fp-model=precise -g -qopenmp -traceback -xHost -mavx512f"
+    BASEFLAGS="-fPIC -fp-model=precise -g -qopenmp -traceback -xHost -mavx2"
   elif [ "${TARGET_CPU}" = "generic" ]; then
-    BASEFLAGS="-fPIC -fp-model=precise -g -mtune=native -qopenmp -traceback -mavx512f"
+    BASEFLAGS="-fPIC -fp-model=precise -g -mtune=native -qopenmp -traceback -mavx2"
   else
-    BASEFLAGS="-fPIC -fp-model=precise -g -march=native -mtune=native -qopenmp -traceback -mavx512f"
+    BASEFLAGS="-fPIC -fp-model=precise -g -march=native -mtune=native -qopenmp -traceback -mavx2"
   fi
   OPT_FLAGS="-O3 -funroll-loops"
   LDFLAGS_C="-nofor-main"
 else
-  BASEFLAGS="-fno-omit-frame-pointer -fopenmp -g -mtune=native IF_ASAN(-fsanitize=address|) -mavx512f"
+  BASEFLAGS="-fno-omit-frame-pointer -fopenmp -g -mtune=native -mavx2 IF_ASAN(-fsanitize=address|)"
   OPT_FLAGS="-O3 -funroll-loops"
   LDFLAGS_C=""
 fi
