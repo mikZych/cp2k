@@ -77,7 +77,7 @@ case "${with_openblas}" in
       (
         make -j $(get_nprocs) \
           MAKE_NB_JOBS=0 \
-          TARGET=${TARGET} \
+          TARGET=ZEN \
           NUM_THREADS=128 \
           USE_THREAD=1 \
           USE_OPENMP=1 \
@@ -89,7 +89,7 @@ case "${with_openblas}" in
       ) || (
         make -j $(get_nprocs) \
           MAKE_NB_JOBS=0 \
-          TARGET=NEHALEM \
+          TARGET=ZEN \
           NUM_THREADS=128 \
           USE_THREAD=1 \
           USE_OPENMP=1 \
@@ -101,7 +101,7 @@ case "${with_openblas}" in
       )
       make -j $(get_nprocs) \
         MAKE_NB_JOBS=0 \
-        TARGET=${TARGET} \
+        TARGET=ZEN \
         NUM_THREADS=128 \
         USE_THREAD=1 \
         USE_OPENMP=1 \
