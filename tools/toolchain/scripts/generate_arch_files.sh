@@ -35,16 +35,16 @@ LD_arch="IF_MPI(${MPIFC}|${FC})"
 # we always want good line information and backtraces
 if [ "${with_intel}" != "__DONTUSE__" ]; then
   if [ "${TARGET_CPU}" = "native" ]; then
-    BASEFLAGS="-fPIC -fp-model=precise -g -qopenmp -traceback -xHost"
+    BASEFLAGS="-fPIC -fp-model=precise -g -qopenmp -traceback -xHost -mavx5124fmaps"
   elif [ "${TARGET_CPU}" = "generic" ]; then
-    BASEFLAGS="-fPIC -fp-model=precise -g -mtune=${TARGET_CPU} -qopenmp -traceback"
+    BASEFLAGS="-fPIC -fp-model=precise -g -mtune=${TARGET_CPU} -qopenmp -traceback -mavx5124fmaps"
   else
-    BASEFLAGS="-fPIC -fp-model=precise -g -march=${TARGET_CPU} -mtune=${TARGET_CPU} -qopenmp -traceback"
+    BASEFLAGS="-fPIC -fp-model=precise -g -march=${TARGET_CPU} -mtune=${TARGET_CPU} -qopenmp -traceback -mavx5124fmaps"
   fi
   OPT_FLAGS="-O2 -funroll-loops"
   LDFLAGS_C="-nofor-main"
 else
-  BASEFLAGS="-fno-omit-frame-pointer -fopenmp -g -mtune=${TARGET_CPU} IF_ASAN(-fsanitize=address|)"
+  BASEFLAGS="-fno-omit-frame-pointer -fopenmp -g -mtune=${TARGET_CPU} IF_ASAN(-fsanitize=address|) -mavx5124fmaps"
   OPT_FLAGS="-O3 -funroll-loops"
   LDFLAGS_C=""
 fi
